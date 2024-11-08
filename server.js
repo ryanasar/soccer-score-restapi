@@ -2,7 +2,7 @@ const express = require('express')
 const appUserRoutes = require('./src/appuser/routes.js')
 
 const app = express()
-const port = 3001
+const port = 3000
 const cors = require('cors');
 
 // Enable CORS for all origins
