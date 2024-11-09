@@ -2,17 +2,13 @@ const express = require('express')
 const appUserRoutes = require('./src/appuser/routes.js')
 
 const app = express()
-const port = 3000
+const port = 3001
 const cors = require('cors');
 
-// Enable CORS for all origins
-app.use(cors());
-
-// Alternatively, configure specific origins
 const corsOptions = {
-  origin: 'chrome-extension://hdjhfpcbpainnggebbednnjadeolgdhk', // Replace with your frontend URL
+  origin: 'chrome-extension://hdjhfpcbpainnggebbednnjadeolgdhk',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Allow cookies to be sent with requests
+  credentials: true, 
 };
 
 app.use(cors(corsOptions));
