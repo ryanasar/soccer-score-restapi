@@ -17,14 +17,14 @@ const getAppUserByGoogleId = (req, res) => {
 }
 
 const addAppUser = (req, res) => {
-    const { googleId, googleEmail, followingTeams, followingLeagues } = req.body
+    const { googleid, googleemail, followingteams, followingleagues } = req.body
 
-    pool.query(queries.getAppUserByGoogleId, [googleId], (error, results) => {
+    pool.query(queries.getAppUserByGoogleId, [googleid], (error, results) => {
         if (results.rows.length) {
             res.send("GoogleId already exists")
         }
         else {
-            pool.query(queries.addAppUser, [googleId, googleEmail, followingTeams, followingLeagues], (error, results) => {
+            pool.query(queries.addAppUser, [googleid, googleemail, followingteams, followingleagues], (error, results) => {
                 if (error) throw error
                 res.status(201).send("AppUser created successfully")
             })
@@ -33,14 +33,14 @@ const addAppUser = (req, res) => {
 }
 
 const removeAppUserByGoogleId = (req, res) => {
-    const googleId = req.params.id
+    const googleid = req.params.id
 
-    pool.query(queries.getAppUserByGoogleId, [googleId], (error, results) => {
+    pool.query(queries.getAppUserByGoogleId, [googleid], (error, results) => {
         if (!results.rows.length) {
             res.send("GoogleId does not exist")
         }
         else {
-            pool.query(queries.removeAppUserByGoogleId, [googleId], (error, results) => {
+            pool.query(queries.removeAppUserByGoogleId, [googleid], (error, results) => {
                 if (error) throw error
                 res.status(200).send("AppUser removed successfully")
             })
@@ -49,15 +49,15 @@ const removeAppUserByGoogleId = (req, res) => {
 }
 
 const updateAppUser = (req, res) => {
-    const googleId = req.params.id
-    const { followingTeams, followingLeagues } = req.body
+    const googleid = req.params.id
+    const { followingteams, followingleagues } = req.body
 
-    pool.query(queries.getAppUserByGoogleId, [googleId], (error, results) => {
+    pool.query(queries.getAppUserByGoogleId, [googleid], (error, results) => {
         if (!results.rows.length) {
             res.send("GoogleId does not exist")
         }
         else {
-            pool.query(queries.updateAppUser, [followingTeams, followingLeagues, googleId], (error, results) => {
+            pool.query(queries.updateAppUser, [followingteams, followingleagues, googleid], (error, results) => {
                 if (error) throw error
                 res.status(200).send("AppUser update successfully")
             })
